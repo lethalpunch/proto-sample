@@ -1,0 +1,26 @@
+syntax = "proto3";
+option go_package = "github.com/maximilienandile/demo-grpc/invoicer";
+
+message Amount {
+  int64 amount = 1;
+  string currency = 2;
+}
+
+message CreateRequest {
+  Amount amount = 1;
+  string from = 2;
+  string to = 3;
+  string VATNumber = 4;
+}
+
+message CreateResponse {
+  string sender = 1;
+  string currency = 2;
+
+}
+
+service Invoicer {
+  rpc Create(CreateRequest) returns (stream CreateResponse);
+  rpc Update(CreateRequest) returns (CreateResponse);
+
+}
